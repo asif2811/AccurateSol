@@ -1,0 +1,100 @@
+<?php
+
+
+
+include("connect.php");
+
+
+
+$c_name = $_POST['c_name'];
+
+
+
+$p_id='0';
+
+
+$sql="insert into cat1(c_name,p_id)values('$c_name','$p_id')";
+
+
+
+mysqli_query($sql) or die(mysql_error());
+
+
+echo "added successfully";
+
+
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form    action="add.php"       method="post">
+
+ADD main Category
+
+<input type=text name="c_name">
+
+<input type="submit"    name="submit"     value="submit">
+
+<form   action="subadd.php"      method="post">
+
+
+<select name="p_id"  >
+
+<?php
+
+
+include("connect.php");
+
+
+
+$sql="select * from  cat1 where  p_id='0'" ;
+
+
+
+$result=mysql_query($sql);
+
+
+
+while($row=mysql_fetch_array($result))
+
+{
+
+
+echo '<option   value="'.$row['c_id'].'">';
+
+
+echo $row['c_name'];
+
+echo '</option>';
+
+
+
+}
+
+
+
+
+
+
+?>
+
+</select>
+
+sub category name <input type=text name="name">
+
+<input type="submit"  name="submit"   vlaue="add-sub" />
+
+
+</form>
+
+</form>
+
+
+</body>
+</html>
